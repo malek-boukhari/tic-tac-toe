@@ -1,0 +1,7 @@
+# JetBrains
+.idea
+
+# VSCode
+.vscode
+
+**/node_modules/
