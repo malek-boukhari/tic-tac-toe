@@ -32,6 +32,8 @@ export class GameServer {
         let isPlaying = true;
 
         while (isPlaying) {
+            console.info(); // Add a new line for better readability
+
             if (this.game.hasGameEnded()) {
                 this.printGameResults();
             }
@@ -127,6 +129,7 @@ export class GameServer {
 
     private sayGoodBye(): void {
         console.clear();
+        this.game.clear();
         console.info('Thanks for playing!');
     }
 }

@@ -137,7 +137,12 @@ export class TicTacToeGame {
         this.moveCount = 0;
         this.gameEnded = false;
         this.gameResult = null;
-        this.createBoard();
+        this.board = this.createBoard();
+    }
+
+    // Clear the instance for testing purposes
+    public clear(): void {
+        TicTacToeGame.instance = null;
     }
 
     public printBoard(): void {
