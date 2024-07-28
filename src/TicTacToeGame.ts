@@ -52,7 +52,7 @@ export class TicTacToeGame {
 
     public makeMove(row: number, col: number): void {
         if (this.hasGameEnded()) {
-            throw new Error('The game is over! Please start a new game.');
+            throw new Error('The game is over! Please start a new game');
         }
 
         if (row < 0 || row >= this.boardSize) {
