@@ -1,21 +1,22 @@
 export type Player = 'X' | 'O';
 export type Cell = Player | ' ';
-export type GameResults = 'X' | 'O' | 'Draw';
+export type Board = Cell[][];
+export type GameResult = 'X' | 'O' | 'Draw';
 export type GameStats = {
     X: number;
     O: number;
     Draw: number;
 };
 
-export class TicTacToe {
-    private static instance: TicTacToe | null = null;
+export class TicTacToeGame {
+    private static instance: TicTacToeGame | null = null;
     private readonly boardSize: number;
     private currentPlayer: Player;
-    private board: Cell[][];
+    private board: Board;
     private moveCount: number;
     private gameEnded: boolean;
     private stats: GameStats;
-    private gameResults: GameResults | null;
+    private gameResult: GameResult | null;
 
     private constructor(boardSize: number = 3) {
         this.boardSize = boardSize;
@@ -23,7 +24,7 @@ export class TicTacToe {
         this.moveCount = 0;
         this.board = this.createBoard();
         this.gameEnded = false;
-        this.gameResults = null;
+        this.gameResult = null;
         this.stats = {
             X: 0,
             O: 0,
@@ -31,19 +32,19 @@ export class TicTacToe {
         };
     }
 
-    public static getInstance(): TicTacToe {
-        if (!TicTacToe.instance) {
-            TicTacToe.instance = new TicTacToe();
+    public static getInstance(): TicTacToeGame {
+        if (!TicTacToeGame.instance) {
+            TicTacToeGame.instance = new TicTacToeGame();
         }
 
-        return TicTacToe.instance;
+        return TicTacToeGame.instance;
     }
 
     /*
      * Creates a new board with the specified size for the rows and columns
      * and initializes each cell with an empty string.
      */
-    private createBoard(): Cell[][] {
+    private createBoard(): Board {
         return Array.from({ length: this.boardSize }, () => {
             return Array.from({ length: this.boardSize }, () => ' ');
         });
@@ -70,19 +71,17 @@ export class TicTacToe {
         this.moveCount++;
 
         if (this.checkWinner(row, col)) {
-            this.gameResults = this.currentPlayer;
             this.stats[this.currentPlayer]++;
             this.gameEnded = true;
-            this.gameResults = this.currentPlayer;
+            this.gameResult = this.currentPlayer;
 
             return;
         }
 
         if (this.isBoardFull()) {
-            this.gameResults = 'Draw';
             this.stats.Draw++;
             this.gameEnded = true;
-            this.gameResults = 'Draw';
+            this.gameResult = 'Draw';
 
             return;
         }
@@ -106,7 +105,7 @@ export class TicTacToe {
         const isMainDiagonal: boolean = row === col;
         if (
             isMainDiagonal &&
-            this.board.every((boardRow, index) => boardRow[index] === this.currentPlayer)
+            this.board.every((boardRow, y) => boardRow[y] === this.currentPlayer)
         ) {
             return true;
         }
@@ -127,25 +126,25 @@ export class TicTacToe {
     }
 
     private determineLoser(): Player {
-        if (this.gameResults === 'Draw') {
+        if (!this.gameResult || this.gameResult === 'Draw') {
             return 'X';
         }
-        return this.gameResults === 'X' ? 'O' : 'X';
+        return this.gameResult === 'X' ? 'O' : 'X';
     }
 
     public resetGame(): void {
         this.currentPlayer = this.determineLoser();
         this.moveCount = 0;
         this.gameEnded = false;
-        this.gameResults = null;
-        this.board = this.createBoard();
+        this.gameResult = null;
+        this.createBoard();
     }
 
     public printBoard(): void {
         for (let i = 0; i < this.boardSize; i++) {
-            console.log(this.board[i].join(' | '));
+            console.info(this.board[i].join(' | '));
             if (i < this.boardSize - 1) {
-                console.log('-'.repeat(this.boardSize * 4 - 1));
+                console.info('-'.repeat(this.boardSize * 4 - 1));
             }
         }
     }
@@ -158,8 +157,8 @@ export class TicTacToe {
         return this.stats;
     }
 
-    public getGameResults(): GameResults {
-        return this.gameResults;
+    public getGameResult(): GameResult {
+        return this.gameResult;
     }
 
     public hasGameEnded(): boolean {

@@ -1,14 +1,14 @@
 import { program } from 'commander';
 
-import { GameCommands } from './GameCommands';
+import { GameServer } from './GameServer';
 
-const gameCommands = new GameCommands();
+const gameServer = new GameServer();
 
 program
     .version('1.0.0')
-    .description('Tic Tac Toe Game')
+    .description('Game server')
     .action(async () => {
-        await gameCommands.start();
+        await gameServer.start();
     });
 
 program.parse(process.argv);

@@ -1,12 +1,12 @@
 import { confirm, input } from '@inquirer/prompts';
 import pc from 'picocolors';
 
-import { TicTacToe } from './TicTacToe';
+import { TicTacToeGame } from './TicTacToeGame';
 
-import type { GameResults, GameStats, Player } from './TicTacToe';
+import type { GameResult, GameStats, Player } from './TicTacToeGame';
 
-export class GameCommands {
-    private game: TicTacToe;
+export class GameServer {
+    private game: TicTacToeGame;
 
     constructor() {
         this.game = null;
@@ -18,17 +18,17 @@ export class GameCommands {
         });
 
         if (!answer) {
-            console.log('Maybe next time!');
+            console.info('Maybe next time!');
             return;
         }
 
-        this.game = TicTacToe.getInstance();
+        this.game = TicTacToeGame.getInstance();
         this.game.printBoard();
         await this.gameLoop();
     }
 
     private async gameLoop(): Promise<void> {
-        console.log(pc.green('Press "e" to exit, "p" to print stats'));
+        console.info(pc.green('Press "e" to exit, "p" to print stats'));
         let isPlaying = true;
 
         while (isPlaying) {
@@ -90,14 +90,14 @@ export class GameCommands {
     }
 
     printGameResults(): void {
-        const winner: GameResults = this.game.getGameResults();
+        const winner: GameResult = this.game.getGameResult();
 
         if (winner === 'Draw') {
-            console.log('The game ended in a draw!');
+            console.info('The game ended in a draw!');
             return;
         }
 
-        console.log(`Player ${this.themedPlayer(winner)} wins!`);
+        console.info(`Player ${this.themedPlayer(winner)} wins!`);
     }
 
     private handleEnterKeyPress(): void {
@@ -114,10 +114,10 @@ export class GameCommands {
         console.clear();
         const stats: GameStats = this.game.getStats();
 
-        console.log(pc.bold('Game Stats'));
-        console.log(`Player ${this.themedPlayer('X')} wins: ${stats.X}`);
-        console.log(`Player ${this.themedPlayer('O')} wins: ${stats.O}`);
-        console.log(`Draw games: ${stats.Draw}`);
+        console.info(pc.bold('Game Stats'));
+        console.info(`Player ${this.themedPlayer('X')} wins: ${stats.X}`);
+        console.info(`Player ${this.themedPlayer('O')} wins: ${stats.O}`);
+        console.info(`Draw games: ${stats.Draw}`);
     }
 
     // Returns the player with the color theme: X in blue, O in magenta
@@ -127,6 +127,6 @@ export class GameCommands {
 
     private sayGoodBye(): void {
         console.clear();
-        console.log('Thanks for playing!');
+        console.info('Thanks for playing!');
     }
 }

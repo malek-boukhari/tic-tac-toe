@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "CommonJS",
-    "outDir": "./build/",
     "removeComments": true,
     "sourceMap": false,
     "noImplicitAny": true,
