@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import { TicTacToeGame } from '../../src/TicTacToeGame';
 
-describe('TicTacToe', () => {
+describe('TicTacToeGame', () => {
     let game: TicTacToeGame;
 
     beforeEach(() => {
