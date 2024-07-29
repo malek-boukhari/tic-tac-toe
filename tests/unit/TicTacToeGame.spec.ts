@@ -7,6 +7,10 @@ describe('TicTacToeGame', () => {
 
     beforeEach(() => {
         game = TicTacToeGame.getInstance();
+    });
+
+    afterEach(() => {
+        // Tear down the singleton instance
         game.clear();
     });
 
