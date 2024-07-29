@@ -29,6 +29,13 @@ describe('Test TicTacToeGame', () => {
             expect(game.getCurrentPlayer()).to.be.equal('O');
         });
 
+        it('should throw an error when the input is out out of range move', () => {
+            expect(() => game.makeMove(-1, 0)).to.throw('Invalid row index');
+            expect(() => game.makeMove(0, -1)).to.throw('Invalid column index');
+            expect(() => game.makeMove(3, 0)).to.throw('Invalid row index');
+            expect(() => game.makeMove(0, 3)).to.throw('Invalid column index');
+        });
+
         it('should throw an error when a cell is occupied', () => {
             game.makeMove(0, 0);
 
@@ -37,13 +44,6 @@ describe('Test TicTacToeGame', () => {
     });
 
     describe('Test Game result', () => {
-        it('should throw an error when the input is out out of range move', () => {
-            expect(() => game.makeMove(-1, 0)).to.throw('Invalid row index');
-            expect(() => game.makeMove(0, -1)).to.throw('Invalid column index');
-            expect(() => game.makeMove(3, 0)).to.throw('Invalid row index');
-            expect(() => game.makeMove(0, 3)).to.throw('Invalid column index');
-        });
-
         it('should detect a win in a row', () => {
             // Simulate a game where X wins
             game.makeMove(0, 0); // X
@@ -106,7 +106,10 @@ describe('Test TicTacToeGame', () => {
         });
     });
 
-    describe('Test resetGame', () => {
+    describe('Test stats', () => {
+        it('should not be able to get game results when a game is running', () => {
+            expect(game.getGameResult()).to.be.null;
+        });
         it('should log stats correctly', () => {
             game.makeMove(0, 2); // X
             game.makeMove(1, 1); // O
@@ -118,7 +121,9 @@ describe('Test TicTacToeGame', () => {
             expect(game.hasGameEnded()).to.be.true;
             expect(game.getStats()).to.deep.equal({ X: 1, O: 0, Draw: 0 });
         });
+    });
 
+    describe('Test resetGame', () => {
         it('should reset the game correctly', () => {
             game.makeMove(0, 0); // X
             game.makeMove(1, 0); // O
