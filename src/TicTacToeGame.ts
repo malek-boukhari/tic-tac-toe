@@ -140,7 +140,7 @@ export class TicTacToeGame {
         this.board = this.createBoard();
     }
 
-    // Clear the instance for testing purposes
+    // Clear the instance of the game
     public clear(): void {
         TicTacToeGame.instance = null;
     }
