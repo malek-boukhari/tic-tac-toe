@@ -10,7 +10,7 @@ describe('TicTacToeGame', () => {
     });
 
     afterEach(() => {
-        // Tear down the singleton instance
+        // Tear down
         game.clear();
     });
 

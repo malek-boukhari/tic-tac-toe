@@ -140,11 +140,6 @@ export class TicTacToeGame {
         this.board = this.createBoard();
     }
 
-    // Clear the instance of the game
-    public clear(): void {
-        TicTacToeGame.instance = null;
-    }
-
     public printBoard(): void {
         for (let i = 0; i < this.boardSize; i++) {
             console.info(this.board[i].join(' | '));
@@ -168,5 +163,10 @@ export class TicTacToeGame {
 
     public hasGameEnded(): boolean {
         return this.gameEnded;
+    }
+
+    // Clear the instance of the game
+    public clear(): void {
+        TicTacToeGame.instance = null;
     }
 }
