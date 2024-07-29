@@ -43,7 +43,7 @@ describe('Test TicTacToeGame', () => {
         });
     });
 
-    describe('Test Game result', () => {
+    describe('Test checkWinner', () => {
         it('should detect a win in a row', () => {
             // Simulate a game where X wins
             game.makeMove(0, 0); // X
@@ -53,7 +53,6 @@ describe('Test TicTacToeGame', () => {
             game.makeMove(0, 2); // X wins
 
             expect(game.getGameResult()).to.be.equal('X');
-            expect(game.hasGameEnded()).to.be.true;
         });
 
         it('should detect a win in a column', () => {
@@ -64,7 +63,6 @@ describe('Test TicTacToeGame', () => {
             game.makeMove(2, 0); // X wins
 
             expect(game.getGameResult()).to.be.equal('X');
-            expect(game.hasGameEnded()).to.be.true;
         });
 
         it('should detect a win in the main diagonal', () => {
@@ -75,7 +73,6 @@ describe('Test TicTacToeGame', () => {
             game.makeMove(2, 2); // X wins
 
             expect(game.getGameResult()).to.be.equal('X');
-            expect(game.hasGameEnded()).to.be.true;
         });
 
         it('should detect a win in the anti diagonal', () => {
@@ -86,7 +83,6 @@ describe('Test TicTacToeGame', () => {
             game.makeMove(2, 0); // X wins
 
             expect(game.getGameResult()).to.be.equal('X');
-            expect(game.hasGameEnded()).to.be.true;
         });
 
         it('should detect a draw', () => {
@@ -102,14 +98,28 @@ describe('Test TicTacToeGame', () => {
             game.makeMove(2, 2); // X
 
             expect(game.getGameResult()).to.be.equal('Draw');
+        });
+    });
+
+    describe('Test gameResult', () => {
+        it('should not be able to get game results when a game is running', () => {
+            expect(game.getGameResult()).to.be.null;
+            expect(game.hasGameEnded()).to.be.false;
+        });
+
+        it('should be able to get game results', () => {
+            game.makeMove(0, 1); // X
+            game.makeMove(1, 1); // O
+            game.makeMove(0, 2); // X
+            game.makeMove(1, 0); // O
+            game.makeMove(0, 0); // X wins
+
             expect(game.hasGameEnded()).to.be.true;
+            expect(game.getGameResult()).to.be.equal('X');
         });
     });
 
     describe('Test stats', () => {
-        it('should not be able to get game results when a game is running', () => {
-            expect(game.getGameResult()).to.be.null;
-        });
         it('should log stats correctly', () => {
             game.makeMove(0, 2); // X
             game.makeMove(1, 1); // O
@@ -117,8 +127,6 @@ describe('Test TicTacToeGame', () => {
             game.makeMove(1, 0); // O
             game.makeMove(0, 0); // X wins
 
-            expect(game.getGameResult()).to.be.equal('X');
-            expect(game.hasGameEnded()).to.be.true;
             expect(game.getStats()).to.deep.equal({ X: 1, O: 0, Draw: 0 });
         });
     });

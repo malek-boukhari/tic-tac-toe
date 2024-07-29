@@ -65,9 +65,8 @@ tic-tac-toe game and a set of unit tests.
     - **`games/TicTacToeGame.ts`**: Tic-Tac-Toe game logic.
     - **`/db`**: Contains data storage files, such as `statsHistory.json` for storing game stats.
     - **`services/StatsHistoryService.ts`**: Manages the loading and saving of game statistics history from and to `stats.json`.
-Game saves of the current game are added to the history only after the game is exited by pressing "e" 
-
-
+Game saves of the current game are added to the history only after the game is exited by pressing "e"
+  
 
 - **`tests/`**: Contains the unit tests.
     - **`TicTacToeGame.spec.ts`**: Unit tests for the Tic-Tac-Toe game.
@@ -80,8 +79,8 @@ The project is structured to ensure separation of concerns:
 - **User Interactions and Game Flow**: Handled by `GameServer.ts`, managing the game server and console interface. 
 It allows us to add more games in the future by extending or modifying the game server logic without affecting the core 
 game logic.
-- **Statistics Management**: Managed by `StatsHistoryService.ts`, which handles reading and writing game statistics to the `stats.json` file. This separates the concerns of data persistence from the game and server logic.
-
+- **Statistics Management**: Managed by `StatsHistoryService.ts`, which handles reading and writing game statistics to 
+the `stats.json` file. This separates the concerns of data persistence from the game and server logic.
 
 ## How to Play
 
