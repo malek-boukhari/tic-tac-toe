@@ -16,34 +16,50 @@ tic-tac-toe game and a set of unit tests.
 - [Node.js](https://nodejs.org/)
 
 ## Installation
+Navigate to the directory
 
-1. Navigate to the directory
+### Using Makefile (recommended)
 
-2. Install dependencies:
+- **Install dependencies:**
 
     ```sh
-    npm install
+    make install
     ```
-
-## Scripts
 
 - **Start the game server:**
 
     ```sh
-    npm start
+    make start
     ```
 
 - **Run the unit tests:**
 
     ```sh
-    npm test
+    make test
     ```
 
-- **Compile TypeScript files:**
+### Manual npm Commands
+
+Alternatively, you can use the npm commands directly:
+
+- **Install dependencies:**
 
     ```sh
-    npm run build
+    npm install
     ```
+
+- **Start the game server:**
+
+    ```sh
+    npm run start
+    ```
+
+- **Run the unit tests:**
+
+    ```sh
+    npm run test
+    ```
+
 
 ## Project Structure
 ```

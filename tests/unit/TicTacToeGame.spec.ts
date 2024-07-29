@@ -25,7 +25,9 @@ describe('Test TicTacToeGame', () => {
 
     describe('Test makeMove', () => {
         it('should be able to make a valid move', () => {
-            game.makeMove(0, 0);
+            game.makeMove(0, 0); // X starts
+
+            expect(game.getBoard()[0][0]).to.be.equal('X');
             expect(game.getCurrentPlayer()).to.be.equal('O');
         });
 
@@ -140,7 +142,7 @@ describe('Test TicTacToeGame', () => {
             game.makeMove(0, 2); // X wins
 
             // Make sure it doesn't allow making a move after the game has ended
-            expect(() => game.makeMove(0, 3)).to.throw('The game is over! Please start a new game');
+            expect(() => game.makeMove(1, 2)).to.throw('The game is over! Please start a new game');
 
             game.resetGame();
 

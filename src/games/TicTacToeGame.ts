@@ -165,6 +165,10 @@ export class TicTacToeGame {
         return this.gameEnded;
     }
 
+    public getBoard(): Board {
+        return this.board;
+    }
+
     // Clear the instance of the game
     public clear(): void {
         TicTacToeGame.instance = null;
