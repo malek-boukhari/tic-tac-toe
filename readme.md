@@ -47,7 +47,7 @@ tic-tac-toe game and a set of unit tests.
 ## Project Structure
 ```
 ├── src/
-│   ├── game/
+│   ├── games/
 │   │   └── TicTacToeGame.ts
 │   ├── server/
 │   │   └── GameServer.ts
@@ -81,6 +81,15 @@ It allows us to add more games in the future by extending or modifying the game 
 game logic.
 - **Statistics Management**: Managed by `StatsHistoryService.ts`, which handles reading and writing game statistics to 
 the `stats.json` file. This separates the concerns of data persistence from the game and server logic.
+
+
+## Future Considerations
+
+- **Resume Game Feature**: Implement a feature that allows players to resume a game from where they left off,
+  rather than starting a new game each time.
+- **Better Separation of Concerns**: Improve the design by moving the board and statistics management (of the current game)
+  outside the `TicTacToeGame`. This could involve creating separate classes for handling the game board and game statistics
+  to further enhance modularity and maintainability.
 
 ## How to Play
 
