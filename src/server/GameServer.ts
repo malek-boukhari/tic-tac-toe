@@ -26,13 +26,16 @@ export class GameServer {
         }
 
         this.game = TicTacToeGame.getInstance();
+        console.clear();
         this.game.printBoard();
         await this.gameLoop();
     }
 
     private async gameLoop(): Promise<void> {
         console.info(
-            pc.green('Press "e" to exit, "p" to print current stats, "h" to print stats history')
+            pc.yellow(
+                'At anytime given time, press "e" to exit, "p" to print current stats, "h" to print stats history'
+            )
         );
         let isPlaying = true;
 
@@ -69,7 +72,7 @@ export class GameServer {
             // Extract row and column from the input
             const [row, col] = ipt.split(':').map(Number);
             if (isNaN(row) || isNaN(col)) {
-                console.error('Invalid input. Please enter row and column as "row:col".');
+                console.error(`Invalid input: ${ipt}. Please enter row and column as "row:col".`);
                 continue;
             }
 
