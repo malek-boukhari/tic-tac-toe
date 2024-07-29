@@ -49,7 +49,7 @@ export class GameServer {
             const ipt = await input({ message: this.printInputMessage() });
 
             if (ipt.toLowerCase() === 'e') {
-                this.sayGoodBye();
+                this.saveAndQuit();
                 isPlaying = false;
                 break;
             }
@@ -129,7 +129,7 @@ export class GameServer {
         console.clear();
         const stats = this.game.getStats();
 
-        console.info(pc.bold('Current game Stats'));
+        console.info(pc.bold('*** Current game Stats ***'));
         this.printStats(stats);
     }
 
@@ -138,7 +138,7 @@ export class GameServer {
             console.clear();
             const stats: GameStats = this.statsHistoryService.loadHistory();
 
-            console.info(pc.bold('Stats history'));
+            console.info(pc.bold('*** Stats history ***'));
             this.printStats(stats);
         } catch (error) {
             console.error('Error loading stats:', error.message);
@@ -156,11 +156,11 @@ export class GameServer {
         return player === 'X' ? pc.blue(player) : pc.magenta(player);
     }
 
-    private sayGoodBye(): void {
+    // Saves the current game and clears the game instance
+    private saveAndQuit(): void {
         console.clear();
-        // Save the current game stats before exiting
         this.statsHistoryService.saveStats(this.game.getStats());
         this.game.clear();
-        console.info('Thanks for playing!');
+        console.info('Thank you for playing. See you soon 💗');
     }
 }

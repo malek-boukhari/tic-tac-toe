@@ -9,6 +9,7 @@ tic-tac-toe game and a set of unit tests.
 - Singleton pattern for managing the game state.
 - Unit tests for various game scenarios.
 - Game statistics history tracking (wins, losses, and draws).
+- Color highlighting of the player names (X and O) for a better user experience.
 
 ## Prerequisites
 
