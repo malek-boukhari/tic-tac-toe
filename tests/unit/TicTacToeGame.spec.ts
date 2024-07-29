@@ -59,7 +59,7 @@ describe('Test TicTacToeGame', () => {
             expect(game.getBoard()[1][0]).to.be.equal('O');
         });
 
-        it('should throw an error when the input is out out of range move', () => {
+        it('should throw an error when the input is out out of range', () => {
             expect(() => game.makeMove(-1, 0)).to.throw('Invalid row index');
             expect(() => game.makeMove(0, -1)).to.throw('Invalid column index');
             expect(() => game.makeMove(3, 0)).to.throw('Invalid row index');
