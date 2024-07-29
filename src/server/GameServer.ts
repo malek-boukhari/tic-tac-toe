@@ -1,15 +1,18 @@
-import { confirm, input } from '@inquirer/prompts';
 import pc from 'picocolors';
+import { confirm, input } from '@inquirer/prompts';
 
-import { TicTacToeGame } from './TicTacToeGame';
+import { StatsHistoryService } from '../services/StatsHistoryService';
+import { TicTacToeGame } from '../games/TicTacToeGame';
 
-import type { GameResult, GameStats, Player } from './TicTacToeGame';
+import type { GameResult, GameStats, Player } from '../games/TicTacToeGame';
 
 export class GameServer {
     private game: TicTacToeGame;
+    private statsHistoryService: StatsHistoryService;
 
     constructor() {
         this.game = null;
+        this.statsHistoryService = new StatsHistoryService();
     }
 
     public async start(): Promise<void> {
@@ -28,7 +31,9 @@ export class GameServer {
     }
 
     private async gameLoop(): Promise<void> {
-        console.info(pc.green('Press "e" to exit, "p" to print stats'));
+        console.info(
+            pc.green('Press "e" to exit, "p" to print current stats, "h" to print stats history')
+        );
         let isPlaying = true;
 
         while (isPlaying) {
@@ -47,7 +52,12 @@ export class GameServer {
             }
 
             if (ipt.toLowerCase() === 'p') {
-                this.printStats();
+                this.printCurrentStats();
+                continue;
+            }
+
+            if (ipt.toLowerCase() === 'h') {
+                this.printStatsHistory();
                 continue;
             }
 
@@ -112,11 +122,27 @@ export class GameServer {
         this.startNewGame();
     }
 
-    private printStats(): void {
+    private printCurrentStats(): void {
         console.clear();
-        const stats: GameStats = this.game.getStats();
+        const stats = this.game.getStats();
 
-        console.info(pc.bold('Game Stats'));
+        console.info(pc.bold('Current game Stats'));
+        this.printStats(stats);
+    }
+
+    private printStatsHistory(): void {
+        try {
+            console.clear();
+            const stats: GameStats = this.statsHistoryService.loadHistory();
+
+            console.info(pc.bold('Stats history'));
+            this.printStats(stats);
+        } catch (error) {
+            console.error('Error loading stats:', error.message);
+        }
+    }
+
+    private printStats(stats: GameStats): void {
         console.info(`Player ${this.themedPlayer('X')} wins: ${stats.X}`);
         console.info(`Player ${this.themedPlayer('O')} wins: ${stats.O}`);
         console.info(`Draw games: ${stats.Draw}`);
@@ -129,6 +155,8 @@ export class GameServer {
 
     private sayGoodBye(): void {
         console.clear();
+        // Save the current game stats before exiting
+        this.statsHistoryService.saveStats(this.game.getStats());
         this.game.clear();
         console.info('Thanks for playing!');
     }

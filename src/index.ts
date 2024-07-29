@@ -1,6 +1,6 @@
 import { program } from 'commander';
 
-import { GameServer } from './GameServer';
+import { GameServer } from './server/GameServer';
 
 const gameServer = new GameServer();
 

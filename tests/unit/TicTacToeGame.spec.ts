@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { TicTacToeGame } from '../../src/TicTacToeGame';
+import { TicTacToeGame } from '../../src/games/TicTacToeGame';
 
 describe('TicTacToeGame', () => {
     let game: TicTacToeGame;

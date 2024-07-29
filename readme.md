@@ -44,11 +44,24 @@ tic-tac-toe game and a set of unit tests.
     ```
 
 ## Project Structure
-
+```
+├── src/
+│   ├── game/
+│   │   ├── TicTacToeGame.ts
+│   ├── server/
+│   │   ├── GameServer.ts
+│   ├── db/
+│   │   ├── stats.json
+│   ├── index.ts
+├── tests/
+│   ├── TicTacToeGame.spec.ts
+```
 - **`src/`**: Contains the source code.
     - **`index.ts`**: Entry point for the game server.
-    - **`GameServer.ts`**: Game server logic.
-    - **`TicTacToeGame.ts`**: Tic-Tac-Toe game logic.
+    - **`server/GameServer.ts`**: Game server logic.
+    - **`games/TicTacToeGame.ts`**: Tic-Tac-Toe game logic.
+    - **src/db**: Contains data storage files, such as `stats.json` for storing game stats.
+
 
 - **`tests/`**: Contains the unit tests.
     - **`TicTacToeGame.spec.ts`**: Unit tests for the Tic-Tac-Toe game.
