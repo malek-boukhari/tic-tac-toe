@@ -25,7 +25,7 @@ export class GameServer {
             return;
         }
 
-        this.game = TicTacToeGame.getInstance();
+        this.game = TicTacToeGame.getInstance(4);
         console.clear();
         this.game.printBoard();
         await this.gameLoop();

@@ -18,7 +18,7 @@ export class TicTacToeGame {
     private stats: GameStats;
     private gameResult: GameResult | null;
 
-    private constructor(boardSize: number = 3) {
+    private constructor(boardSize: number) {
         this.boardSize = boardSize;
         this.currentPlayer = 'X';
         this.moveCount = 0;
@@ -32,9 +32,9 @@ export class TicTacToeGame {
         };
     }
 
-    public static getInstance(): TicTacToeGame {
+    public static getInstance(boardSize: number = 3): TicTacToeGame {
         if (!TicTacToeGame.instance) {
-            TicTacToeGame.instance = new TicTacToeGame();
+            TicTacToeGame.instance = new TicTacToeGame(boardSize);
         }
 
         return TicTacToeGame.instance;
