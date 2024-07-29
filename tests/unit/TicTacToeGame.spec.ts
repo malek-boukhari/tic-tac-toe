@@ -34,7 +34,9 @@ describe('Test TicTacToeGame', () => {
 
             expect(() => game.makeMove(0, 0)).to.throw('Cell is already occupied');
         });
+    });
 
+    describe('Test Game result', () => {
         it('should throw an error when the input is out out of range move', () => {
             expect(() => game.makeMove(-1, 0)).to.throw('Invalid row index');
             expect(() => game.makeMove(0, -1)).to.throw('Invalid column index');
