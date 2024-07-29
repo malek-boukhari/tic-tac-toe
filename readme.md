@@ -62,7 +62,5 @@ The project is structured to ensure separation of concerns:
 It allows us to add more games in the future by extending or modifying the game server logic without affecting the core 
 game logic.
 
-
-## Author
-
-Malek Boukhari
+## Questions and Improvements
+For any questions or improvements please send an e-mail to [boukhari.malek@gmail.com](mailto:boukhari.malek@gmail.com)
