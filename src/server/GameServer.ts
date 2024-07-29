@@ -112,7 +112,7 @@ export class GameServer {
             return;
         }
 
-        console.info(`Player ${this.themedPlayer(winner)} wins!`);
+        console.info(`Player ${this.themedPlayer(winner)} wins! 🎉`);
     }
 
     private handleEnterKeyPress(): void {
